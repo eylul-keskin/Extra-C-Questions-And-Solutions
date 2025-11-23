@@ -24,12 +24,22 @@ int question4(char *sourcePath, char *destPath) {
         if((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) {
             len++;
         } else {
-            freq[len]++;
+            if(len > 0 && len < WORD_LEN) {
+                freq[len]++;
+            }
             len = 0;
         }
     }
-    for(int i = 0; i < WORD_LEN ; i++) {
-        fprintf(destPath , "%d: %d" , i , freq[i]);
+
+    if (len > 0 && len < WORD_LEN) {
+        freq[len]++;
     }
+
+    for(int i = 0; i < WORD_LEN ; i++) {
+        fprintf(fpDest , "Length %d: %d\n" , i , freq[i]);
+    }
+
+    fclose(fpSource);
+    fclose(fpDest);
     return 1;
 }
